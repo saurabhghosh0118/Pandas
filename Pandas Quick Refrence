@@ -1,0 +1,32 @@
+PANDAS
+===================
+Selecting Column 						=> 					df["col_name"]
+
+Adding New Column 						=>					df["new_col"] = "Common" OR df["col1] + 5 
+
+Drop Rows with NULL Values 				=>					df.dropna()
+
+Fill in NULL Values 					=>					df.fillna(0) #This will fill all null values with zero insted use the below
+															df["Salary"].fillna(0, inplace = True), df["College"].fillna("No Collage", inplace = True)
+Convert DataFrame Column Type   		=>  				-Column must not have null values
+															nba["Salary"] = nba["Salary"].astype("int")
+															***df["col_name"].astype("category") -> When you have milions of record and a col have few distinct
+															values then use "category" data type then column will actually dont have the value it will 
+															have pointer to the string value.
+Sorting on two column with 
+different order eg col1 (accending)		=> 					nba.sort_values(["Team","Name"], accending = [True, False])
+col2 (decending)
+
+Changing string column type to 			=> 					df["Start Date"] = pd.to_datetime(df["Start Date"])
+date type													**During csv read -> pd.read_csv("employee.csv", parse_dates = ["Start Date","Last Login"])
+
+Filtering 								=> 					df[df["Gender"] == "Male"]
+															con1 = df["Gender"] == "Male", con2 = df["Team"] = "Finance",  df[con1 AND/& con2]
+															df[df["Team"].isin(["Finance", "Marketing"])]
+															** df[df["Category"].isnull()]
+															df[df["Salary"].between(60000,90000)]
+															***df["First Name"].duplicated(keep = "first"/"last"/False) -> 
+																first -> for all same entries mark first entry as non duplicate and remaining duplicates
+																False -> for all same entries mark all as duplicates
+															***** to change False to True use "~"
+																to select all distinct name -> df[~df["First Name"].duplicated(keep = False)]
